@@ -165,13 +165,19 @@
 </div>
 
 <form id="visitorForm">
-  <label id="labelCompany">Company Name <span class="req">*</span></label>
-  <input type="text" id="company" required>
+  <label id="labelCompany">Company Name</label>
+  <input type="text" id="company">
 
-  <label id="labelName">Your Name <span class="req">*</span></label>
-  <input type="text" id="visitorName" required>
+  <label id="labelName">Your Name</label>
+  <input type="text" id="visitorName">
 
-  <label id="labelMemo">Note (optional)</label>
+  <label id="labelItem">Item Name</label>
+  <input type="text" id="itemName">
+
+  <label id="labelQty">Quantity</label>
+  <input type="text" id="qty">
+
+  <label id="labelMemo">Notes</label>
   <textarea id="memo"></textarea>
 
   <label id="labelPhoto">Photos <span class="req">*</span> <span style="font-weight:normal;font-size:12px;color:#666;">(max 3)</span></label>
@@ -195,7 +201,9 @@ const i18n = {
     subtitle: "Please fill in your details if leaving items at the gate.",
     company: "Company Name",
     name: "Your Name",
-    memo: "Note (optional)",
+    item: "Item Name",
+    qty: "Quantity",
+    memo: "Notes",
     photo: "Photos",
     photoBtn: "📷 Take / Choose Photos",
     submit: "Submit",
@@ -211,7 +219,9 @@ const i18n = {
     subtitle: "如在大门处留下物品,请填写以下信息。",
     company: "公司名称",
     name: "您的姓名",
-    memo: "备注(选填)",
+    item: "物品名称",
+    qty: "数量",
+    memo: "备注",
     photo: "照片",
     photoBtn: "📷 拍照或选择照片",
     submit: "提交",
@@ -224,16 +234,18 @@ const i18n = {
   },
   ms: {
     title: "Pendaftaran di Pintu Eastmen",
-    subtitle: "Sila isi maklumat anda jika meninggalkan barang di pintu.",
+    subtitle: "Sila isi maklumat jika meninggalkan barang di pintu.",
     company: "Nama Syarikat",
     name: "Nama Anda",
-    memo: "Nota (pilihan)",
+    item: "Nama Barang",
+    qty: "Kuantiti",
+    memo: "Catatan",
     photo: "Gambar",
     photoBtn: "📷 Ambil / Pilih Gambar",
     submit: "Hantar",
     sending: "Menghantar...",
     success: "✅ Berjaya dihantar! Eastmen telah dimaklumkan.",
-    error: "❌ Gagal menghantar. Sila cuba lagi atau hubungi Eastmen.",
+    error: "❌ Gagal menghantar. Sila cuba lagi.",
     needPhoto: "⚠ Sila lampirkan sekurang-kurangnya 1 gambar.",
     maxPhoto: "⚠ Maksimum 3 gambar.",
     selected: "dipilih"
@@ -248,8 +260,10 @@ function setLang(lang, e) {
   const t = i18n[lang];
   document.getElementById('title').textContent = t.title;
   document.getElementById('subtitle').textContent = t.subtitle;
-  document.getElementById('labelCompany').innerHTML = t.company + ' <span class="req">*</span>';
-  document.getElementById('labelName').innerHTML = t.name + ' <span class="req">*</span>';
+  document.getElementById('labelCompany').textContent = t.company;
+  document.getElementById('labelName').textContent = t.name;
+  document.getElementById('labelItem').textContent = t.item;
+  document.getElementById('labelQty').textContent = t.qty;
   document.getElementById('labelMemo').textContent = t.memo;
   document.getElementById('labelPhoto').innerHTML = t.photo + ' <span class="req">*</span> <span style="font-weight:normal;font-size:12px;color:#666;">(max 3)</span>';
   document.getElementById('photoBtnText').innerHTML = t.photoBtn;
@@ -294,13 +308,11 @@ function showStatus(msg, type) {
 async function submitForm() {
   const company = document.getElementById('company').value.trim();
   const visitorName = document.getElementById('visitorName').value.trim();
+  const itemName = document.getElementById('itemName').value.trim();
+  const qty = document.getElementById('qty').value.trim();
   const memo = document.getElementById('memo').value.trim();
   const t = i18n[currentLang];
 
-  if (!company || !visitorName) {
-    showStatus('⚠ Required fields missing.', 'error');
-    return;
-  }
   if (photos.length === 0) {
     showStatus(t.needPhoto, 'error');
     return;
@@ -313,6 +325,8 @@ async function submitForm() {
   const fd = new FormData();
   fd.append('company', company);
   fd.append('visitorName', visitorName);
+  fd.append('itemName', itemName);
+  fd.append('qty', qty);
   fd.append('memo', memo);
   fd.append('lang', currentLang.toUpperCase());
   photos.forEach(p => fd.append('photos', p));
@@ -339,7 +353,6 @@ async function submitForm() {
     btn.disabled = false;
   }
 }
-
 </script>
 
 </body>
