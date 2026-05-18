@@ -188,7 +188,6 @@
 
 <footer>Eastmen Engineering Sdn. Bhd.</footer>
 
-<script src="config.js"></script>
 <script>
 const i18n = {
   en: {
@@ -311,45 +310,36 @@ async function submitForm() {
   btn.disabled = true;
   showStatus(t.sending, 'loading');
 
-  const now = new Date();
-  const timeStr = now.toLocaleString('en-GB', { timeZone: 'Asia/Kuala_Lumpur' });
-  const text =
-    '🚪 Gate Drop-off Alert\n\n' +
-    '🏢 Company: ' + company + '\n' +
-    '👤 Visitor: ' + visitorName + '\n' +
-    '📝 Note: ' + (memo || '-') + '\n' +
-    '🌐 Language: ' + currentLang.toUpperCase() + '\n' +
-    '🕒 Time: ' + timeStr + ' (MYT)';
+  const fd = new FormData();
+  fd.append('company', company);
+  fd.append('visitorName', visitorName);
+  fd.append('memo', memo);
+  fd.append('lang', currentLang.toUpperCase());
+  photos.forEach(p => fd.append('photos', p));
 
   try {
-    const msgRes = await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+    const res = await fetch('https://eastmen-gate.jiman0915.workers.dev', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+      body: fd
     });
-    if (!msgRes.ok) throw new Error('text fail');
 
-    for (let i = 0; i < photos.length; i++) {
-      const fd = new FormData();
-      fd.append('chat_id', CHAT_ID);
-      fd.append('caption', 'Photo ' + (i + 1) + ' / ' + photos.length + ' - ' + company);
-      fd.append('photo', photos[i]);
-      const photoRes = await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendPhoto', {
-        method: 'POST',
-        body: fd
-      });
-      if (!photoRes.ok) throw new Error('photo fail');
+    const data = await res.json();
+
+    if (data.ok) {
+      showStatus(t.success, 'success');
+      document.getElementById('visitorForm').reset();
+      photos = [];
+      renderPhotos();
+      setTimeout(() => { btn.disabled = false; }, 3000);
+    } else {
+      throw new Error(data.error || 'Unknown error');
     }
-
-    showStatus(t.success, 'success');
-    document.getElementById('visitorForm').reset();
-    photos = [];
-    renderPhotos();
   } catch (err) {
     showStatus(t.error, 'error');
     btn.disabled = false;
   }
 }
+
 </script>
 
 </body>
