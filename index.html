@@ -166,7 +166,24 @@
 
 <form id="visitorForm">
   <label id="labelCompany">Company Name <span class="req">*</span></label>
-  <input type="text" id="company">
+  <input type="text" id="company" list="companyList" autocomplete="off" placeholder="Select or type company name">
+  <datalist id="companyList">
+    <option value="SG PADIMAS ENGINEERING SDN. BHD.">
+    <option value="INTEL DYNAMIC SDN. BHD.">
+    <option value="PURE-CHEM INDUSTRIES SDN. BHD.">
+    <option value="BEE STATIONERY ENTERPRISE SDN. BHD.">
+    <option value="AT FORKLIFT REPAIR AND SERVICES">
+    <option value="PACK PLUS INDUSTRIES SDN. BHD.">
+    <option value="SUI ZHONG">
+    <option value="MS CHEM (SEA) SDN. BHD.">
+    <option value="PARAGON INTERCOMMODITIES SDN. BHD.">
+    <option value="SAYONG CHEMICALS SDN. BHD.">
+    <option value="MACDERMID ENTHONE">
+    <option value="JERICO">
+    <option value="KEMIA">
+    <option value="IST">
+    <option value="RICA">
+  </datalist>
 
   <label id="labelItem">Item Name</label>
   <input type="text" id="itemName">
@@ -197,6 +214,7 @@ const i18n = {
     title: "Eastmen Gate Drop-off",
     subtitle: "Please fill in your details and take photo of the part.",
     company: "Company Name",
+    companyPh: "Select or type company name",
     item: "Item Name",
     qty: "Quantity",
     memo: "Notes",
@@ -215,6 +233,7 @@ const i18n = {
     title: "Eastmen 大门物品登记",
     subtitle: "请填写以下信息并拍摄物品照片。",
     company: "公司名称",
+    companyPh: "选择或输入公司名称",
     item: "物品名称",
     qty: "数量",
     memo: "备注",
@@ -233,6 +252,7 @@ const i18n = {
     title: "Pendaftaran di Pintu Eastmen",
     subtitle: "Sila isi maklumat dan ambil gambar barang.",
     company: "Nama Syarikat",
+    companyPh: "Pilih atau taip nama syarikat",
     item: "Nama Barang",
     qty: "Kuantiti",
     memo: "Catatan",
@@ -258,6 +278,7 @@ function setLang(lang, e) {
   document.getElementById('title').textContent = t.title;
   document.getElementById('subtitle').textContent = t.subtitle;
   document.getElementById('labelCompany').innerHTML = t.company + ' <span class="req">*</span>';
+  document.getElementById('company').placeholder = t.companyPh;
   document.getElementById('labelItem').textContent = t.item;
   document.getElementById('labelQty').textContent = t.qty;
   document.getElementById('labelMemo').textContent = t.memo;

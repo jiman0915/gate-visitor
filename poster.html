@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Eastmen Gate Drop-off - Notice</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+  body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: #fff;
+    color: #2a2a2a;
+    padding: 15mm 15mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    text-align: center;
+    width: 100%;
+    border-bottom: 3px solid #8b6f47;
+    padding-bottom: 10mm;
+  }
+  .company-name {
+    font-size: 26pt;
+    font-weight: bold;
+    color: #8b6f47;
+    letter-spacing: 0.5px;
+  }
+  .headline-block {
+    text-align: center;
+    width: 100%;
+    margin-top: 6mm;
+  }
+  .headline {
+    font-size: 22pt;
+    font-weight: bold;
+    color: #2a2a2a;
+    line-height: 1.4;
+    margin-bottom: 3mm;
+  }
+  .headline.zh {
+    font-size: 22pt;
+  }
+  .headline.ms {
+    font-size: 20pt;
+  }
+  .qr-wrap {
+    background: #f5f1ea;
+    padding: 10mm;
+    border-radius: 6mm;
+    border: 2px solid #8b6f47;
+  }
+  .qr-wrap img {
+    width: 90mm;
+    height: 90mm;
+    display: block;
+  }
+  .instruction {
+    text-align: center;
+    width: 100%;
+  }
+  .scan-text {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #8b6f47;
+    margin-bottom: 3mm;
+  }
+  .scan-text.zh,
+  .scan-text.ms {
+    font-size: 14pt;
+    color: #666;
+    font-weight: normal;
+    margin-bottom: 2mm;
+  }
+  .notice {
+    text-align: center;
+    width: 100%;
+    margin-top: 6mm;
+    padding: 0 5mm;
+  }
+  .notice-title {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #d97706;
+    margin-bottom: 4mm;
+  }
+  .notice-text {
+    font-size: 13pt;
+    color: #444;
+    line-height: 1.6;
+  }
+  .notice-text.zh,
+  .notice-text.ms {
+    font-size: 12pt;
+    color: #666;
+  }
+  .footer {
+    width: 100%;
+    text-align: center;
+    font-size: 9pt;
+    color: #999;
+    border-top: 1px solid #ddd;
+    padding-top: 4mm;
+    margin-top: 4mm;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="company-name">Eastmen Engineering Sdn. Bhd.</div>
+  </div>
+
+  <div class="headline-block">
+    <div class="headline">No staff at the gate?</div>
+    <div class="headline zh">无人在大门?</div>
+    <div class="headline ms">Tiada staf di pintu?</div>
+  </div>
+
+  <div class="qr-wrap">
+    <img src="qr.png" alt="QR Code">
+  </div>
+
+  <div class="instruction">
+    <div class="scan-text">Scan QR to register your drop-off</div>
+    <div class="scan-text zh">扫描二维码登记您留下的物品</div>
+    <div class="scan-text ms">Imbas QR untuk daftar barang anda</div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">Important</div>
+    <div class="notice-text">We will be notified instantly upon submission.<br>Please fill in details and attach photos of your items.</div>
+    <div class="notice-text zh">提交后我们将立即收到通知。请填写信息并附上物品照片。</div>
+    <div class="notice-text ms">Kami akan dimaklumkan serta-merta. Sila isi maklumat dan lampirkan gambar.</div>
+  </div>
+
+  <div class="footer">
+    Eastmen Engineering Sdn. Bhd. 
+
+</body>
+</html>
